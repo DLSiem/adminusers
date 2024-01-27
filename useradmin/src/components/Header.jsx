@@ -1,0 +1,58 @@
+import React from "react";
+import { Navbar, Button, Dropdown, Avatar } from "flowbite-react";
+import { Link, useLocation } from "react-router-dom";
+
+export default function Header() {
+  const path = useLocation().pathname;
+  return (
+    <Navbar fluid rounded className="border-b-2 border-gray-400 bg-green-50">
+      <Link to="/">
+        <Navbar.Brand>
+          <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+            Ant-man
+          </span>
+        </Navbar.Brand>
+      </Link>
+      <div className="flex md:order-2">
+        {/* <Dropdown
+          arrowIcon={false}
+          inline
+          label={
+            <Avatar
+              alt="User settings"
+              img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+              rounded
+            />
+          }
+        >
+          <Dropdown.Header>
+            <span className="block text-sm">Bonnie Green</span>
+            <span className="block truncate text-sm font-medium">
+              name@flowbite.com
+            </span>
+          </Dropdown.Header>
+          <Dropdown.Item>Dashboard</Dropdown.Item>
+          <Dropdown.Item>Settings</Dropdown.Item>
+          <Dropdown.Item>Earnings</Dropdown.Item>
+          <Dropdown.Divider />
+          <Dropdown.Item>Sign out</Dropdown.Item>
+        </Dropdown> */}
+        <Navbar.Toggle />
+      </div>
+      <Navbar.Collapse>
+        <Navbar.Link active={path === "/"} href="/" as={"div"}>
+          <Link to="/">Home</Link>
+        </Navbar.Link>
+        <Navbar.Link active={path === "/users"} as={"div"}>
+          <Link to="/users">Users</Link>
+        </Navbar.Link>
+        <Navbar.Link active={path === "/dashboard"} as={"div"}>
+          <Link to="/dashboard">Dashboard</Link>
+        </Navbar.Link>
+        <Navbar.Link active={path === "/signup"} as={"div"}>
+          <Link to="/signup">Sign up</Link>
+        </Navbar.Link>
+      </Navbar.Collapse>
+    </Navbar>
+  );
+}

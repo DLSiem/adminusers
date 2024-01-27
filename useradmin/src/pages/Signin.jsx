@@ -1,5 +1,5 @@
 import React from "react";
 
 export default function Signin() {
-  return <div>Signin</div>;
+  return <div className="min-h-screen">Signin</div>;
 }
