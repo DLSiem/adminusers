@@ -9,7 +9,7 @@ export default function Header() {
       <Link to="/">
         <Navbar.Brand>
           <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-            Ant-man
+            Ant-mann
           </span>
         </Navbar.Brand>
       </Link>
