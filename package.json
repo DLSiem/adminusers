@@ -2,8 +2,8 @@
   "name": "usersadmin",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "nodemon api/index.js",
     "start": "node api/index.js"
