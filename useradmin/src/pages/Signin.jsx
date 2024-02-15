@@ -3,30 +3,37 @@ import { useState } from "react";
 import { TextInput, Button, Alert, Spinner } from "flowbite-react";
 import { Link, useNavigate } from "react-router-dom";
 import { HiInformationCircle } from "react-icons/hi";
-import { set } from "mongoose";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  signInStart,
+  signInSuccess,
+  signInFailure,
+} from "./../redux/user/userSlice";
 
 export default function Signin() {
   const [formData, setFormData] = useState({});
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+
+  const { loading, error: errorMessage } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  // const [errorMessage, setErrorMessage] = useState(null);
+  // const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const HandleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
-    setErrorMessage(null);
+    dispatch(signInFailure(null));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.email || !formData.password) {
-      setErrorMessage("All fields are required");
-      return;
+      return dispatch(signInFailure("All fields are required"));
     }
 
     try {
-      setIsLoading(true);
-      setErrorMessage(null);
+      dispatch(signInStart());
       const res = await fetch("/api/auth/signin", {
         method: "POST",
         headers: {
@@ -38,18 +45,18 @@ export default function Signin() {
       const data = await res.json();
 
       if (data.success === false) {
-        setIsLoading(false);
-        return setErrorMessage(data.message);
+        return dispatch(signInFailure(data.message));
       }
 
       if (res.ok) {
+        dispatch(signInSuccess(data));
         navigate("/");
       }
 
       formData.email = "";
       formData.password = "";
     } catch (error) {
-      setErrorMessage(error.message);
+      dispatch(signInFailure(error.message));
     }
   };
 
@@ -79,7 +86,7 @@ export default function Signin() {
           </div>
 
           <Button className="w-full" type="submit">
-            {isLoading ? (
+            {loading ? (
               <>
                 <Spinner /> <span className="pl-4">Loading...</span>
               </>
