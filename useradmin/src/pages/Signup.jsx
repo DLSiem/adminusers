@@ -3,7 +3,7 @@ import { useState } from "react";
 import { TextInput, Button, Alert, Spinner } from "flowbite-react";
 import { Link, useNavigate } from "react-router-dom";
 import { HiInformationCircle } from "react-icons/hi";
-import { set } from "mongoose";
+import OAuth from "../components/OAuth";
 
 export default function Signup() {
   const [formData, setFormData] = useState({});
@@ -135,6 +135,7 @@ export default function Signup() {
                 "Sign up"
               )}
             </Button>
+            <OAuth />
           </form>
           <div className="mt-2">
             <p className="text-xs">

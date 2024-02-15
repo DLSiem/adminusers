@@ -9,15 +9,13 @@ import {
   signInSuccess,
   signInFailure,
 } from "./../redux/user/userSlice";
+import OAuth from "../components/OAuth";
 
 export default function Signin() {
   const [formData, setFormData] = useState({});
 
   const { loading, error: errorMessage } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-
-  // const [errorMessage, setErrorMessage] = useState(null);
-  // const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const HandleChange = (e) => {
@@ -27,7 +25,6 @@ export default function Signin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!formData.email || !formData.password) {
       return dispatch(signInFailure("All fields are required"));
     }
@@ -94,6 +91,7 @@ export default function Signin() {
               "Sign In"
             )}
           </Button>
+          <OAuth />
         </form>
         <div className="mt-2">
           <p className="text-xs">
