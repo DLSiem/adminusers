@@ -59,7 +59,7 @@ export default function Signin() {
 
   return (
     <div className="min-h-screen mt-20">
-      <div className="flex-1 rounded-md border-2 mx-2 p-4 max-w-96">
+      <div className="flex-1 rounded-md border-2 mx-auto p-4 max-w-96">
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="mb-2 block">
             <TextInput
