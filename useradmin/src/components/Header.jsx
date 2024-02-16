@@ -1,11 +1,15 @@
 import React from "react";
 import { Navbar, Button, Dropdown, Avatar } from "flowbite-react";
 import { Link, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { FaMoon, FaSun } from "react-icons/fa";
+import { toggleTheme } from "../redux/theme/themeSlice";
 
 export default function Header() {
   const path = useLocation().pathname;
+  const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.user);
+  const { theme } = useSelector((state) => state.theme);
   return (
     <Navbar fluid rounded className="border-b-2 border-gray-400 bg-green-50">
       <Link to="/">
@@ -16,6 +20,9 @@ export default function Header() {
         </Navbar.Brand>
       </Link>
       <div className="flex md:order-2">
+        <Button className="mx-2" onClick={() => dispatch(toggleTheme())}>
+          {theme === "dark" ? <FaSun /> : <FaMoon />}
+        </Button>
         {currentUser ? (
           <Dropdown
             arrowIcon={false}
@@ -30,7 +37,7 @@ export default function Header() {
           >
             <Dropdown.Header>
               <span className="block text-sm">{currentUser.username}</span>
-              <span className="block truncate text-sm font-medium">
+              <span className="block text-sm font-medium truncate">
                 {currentUser.email}
               </span>
             </Dropdown.Header>
